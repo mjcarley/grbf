@@ -1,0 +1,23 @@
+#!/bin/bash
+
+SOLVE=../../tools/llt-solve
+
+V=(2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19)
+##V=(10)
+
+opfile=pcurve.dat
+
+rm -f ${opfile}
+
+for (( i=0; i < ${#V[@]} ; i++ )) do
+    v=${V[i]}
+    echo Velocity: ${v}
+    echo ${SOLVE} -L apc-prop.llt  -R 6700 -T 0.027 -n 64 -U ${v} \
+		       -s naca4412.sec -B 2 -W -r
+    ${SOLVE} -L apc-prop.llt  -R 6700 -T 0.027 -n 64 -U ${v} \
+		       -s naca4412.sec -B 2 -W -r -c 48 \
+		       2&> log.dat  > cl-${i}.dat
+    T=`grep force log.dat | cut -d " " -f 4`
+    M=`grep moment log.dat | cut -d " " -f 4`
+    echo ${v} ${T} ${M} >> ${opfile}
+done

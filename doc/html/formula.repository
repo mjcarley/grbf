@@ -1,0 +1,22 @@
+\_form#0=6x10:$k$
+\_form#1=5x9:$i$
+\_form#2=6x11:$j$
+\_form#3=8x6:$\alpha$
+\_form#4=40x11:$3N+1$
+\_form#5=101x15:$(N+1)^2+3N+1$
+\_form#6=160x15:$f(x)=\sum c_{i}\exp(-\alpha^{2}(x-i)^{2})$
+\_form#7=45x14:$f(0)=1$
+\_form#8=48x14:$f(x)=0$
+\_form#9=81x11:$x=\pm1, \pm2, \ldots$
+\_form#10=8x6:$x$
+\_form#11=24x14:$f(x)$
+\_form#12=13x11:$E_{i}$
+\_form#13=165x15:$f(x)=\sum E_{i}\exp(-\alpha^{2}(x-i)^{2})$
+\_form#14=20x11:$E_{-i}$
+\_form#15=48x15:$(N+1)^{2}$
+\_form#16=161x15:$f(x)=\sum E_{i}\exp[-\alpha^{2}(x-i)^{2}]$
+\_form#17=29x11:$i\geq0$
+\_form#18=156x15:$f=\sum w_{i}\exp[-(x-y_{i})^{2}/\sigma_{i}^{2}]$
+\_form#19=10x9:$\sigma_{i}$
+\_form#20=8x6:$\sigma$
+\_form#21=13x6:$m$

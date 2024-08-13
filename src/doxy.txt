@@ -1,0 +1,10 @@
+/**
+  @mainpage Gaussian Radial Basis Functions
+
+  @defgroup weights Evaluating Gaussian RBF interpolation weights
+
+  @defgroup cardinal Cardinal functions for interpolation on regular
+  grids
+
+  @defgroup interp Evaluation of Gaussian RBF interpolants
+*/

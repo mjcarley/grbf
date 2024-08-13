@@ -1,0 +1,21 @@
+    PLOP
+    G
+    
+    LOAD llt-aerofoil.dat
+    PANE
+    OPER
+    ITER 40
+    VISC 1e+06
+    ALFA 2
+    !
+    PACC
+    polar_tmp.dat
+
+    ALFA 2
+    !
+    ASEQ 2 25 0.25
+    INIT
+    ASEQ 2 -25 0.25
+    PACC
+
+    QUIT

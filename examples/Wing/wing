@@ -1,0 +1,14 @@
+#!/bin/bash
+
+## test case for elliptical wing from van Garrel
+
+SOLVE=../../tools/llt-solve
+## flight velocity
+U=1
+## pitch oscillation frequency
+Om=0
+## pitch oscillation amplitude
+al=0.0997
+
+${SOLVE} -a ${al} -L wing.llt -n 256 -t 0 -T 10 \
+	 -U ${U} -w > cl.dat

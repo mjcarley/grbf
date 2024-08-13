@@ -1,0 +1,26 @@
+#!/bin/bash
+
+## test case for pitching wing from Piziali, NASA TM 4632, 1994; Bird
+## and Ramesh, 2021, https://doi.org/10.1007/s00162-021-00578-8
+
+SOLVE=../../tools/llt-solve
+## flight velocity
+U=100.46
+## pitch oscillation frequency
+Om=62.895
+## start and end time for four oscillations
+t=0.0
+T=0.4
+## pitch oscillation mean and amplitude
+al=0.0695
+da=0.0724
+## number of time steps
+nt=256
+
+echo Executing: ${SOLVE} -A ${al} -a ${da} -L wing.llt -n ${nt} -O ${Om} \
+	 -s naca0015.sec -t ${t} -T ${T} -d Data/solution-%d.dat \
+	 -U ${U} -w -W
+
+${SOLVE} -A ${al} -a ${da} -L wing.llt -n ${nt} -O ${Om} \
+	 -s naca0015.sec -t ${t} -T ${T} -d Data/solution-%d.dat \
+	 -U ${U} -w -W > cl.dat
