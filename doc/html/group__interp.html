@@ -47,6 +47,10 @@ $(function() {
 <tr class="separator:ga4eeca71a5ba5caf43b5f72e736185596"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga68c232314c7564e50f6abc9319ca3789"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__interp.html#ga68c232314c7564e50f6abc9319ca3789">grbf_gaussian_eval_1d</a> (gdouble *y, gint ystr, gint ny, gdouble *s, gint sstr, gdouble *w, gint wstr, gint nc, gdouble x, gdouble *f)</td></tr>
 <tr class="separator:ga68c232314c7564e50f6abc9319ca3789"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7daa41d7673f4ee9bcb2f8504f743587"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__interp.html#ga7daa41d7673f4ee9bcb2f8504f743587">grbf_gaussian_eval_2d</a> (gdouble *y, gint ystr, gint ny, gdouble *s, gint sstr, gdouble *w, gint wstr, gint nc, gdouble *x, gdouble *f)</td></tr>
+<tr class="separator:ga7daa41d7673f4ee9bcb2f8504f743587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga777243fe2cd639a294f6a92c53e256a2"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__interp.html#ga777243fe2cd639a294f6a92c53e256a2">grbf_gaussian_eval_3d</a> (gdouble *y, gint ystr, gint ny, gdouble *s, gint sstr, gdouble *w, gint wstr, gint nc, gdouble *x, gdouble *f)</td></tr>
+<tr class="separator:ga777243fe2cd639a294f6a92c53e256a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
@@ -123,7 +127,193 @@ $(function() {
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Evaluate a Gaussian RBF interpolant with arbitrarily spaced interpolation nodes, <img class="formulaInl" alt="$f=\sum w_{i}\exp[-(x-y_{i})^{2}/\sigma_{i}^{2}]$" src="form_18.png" width="156" height="15"/>.</p>
+<p >Evaluate a Gaussian RBF interpolant with arbitrarily spaced interpolation nodes, <img class="formulaInl" alt="$\mathbf{f}=\sum \mathbf{w}_{i}\exp[-(x-y_{i})^{2}/\sigma_{i}^{2}]$" src="form_22.png" width="158" height="15"/>, in one dimension.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>interpolation node coordinates; </td></tr>
+    <tr><td class="paramname">ystr</td><td>stride in <em>y</em>; </td></tr>
+    <tr><td class="paramname">ny</td><td>number of interpolation nodes; </td></tr>
+    <tr><td class="paramname">s</td><td>interpolation node Gaussian parameters, <img class="formulaInl" alt="$\sigma_{i}$" src="form_19.png" width="10" height="9"/>; </td></tr>
+    <tr><td class="paramname">sstr</td><td>stride in <em>s</em> (can be zero to set constant <img class="formulaInl" alt="$\sigma$" src="form_20.png" width="8" height="6"/>); </td></tr>
+    <tr><td class="paramname">w</td><td>interpolation weights; </td></tr>
+    <tr><td class="paramname">wstr</td><td>stride in <em>w</em>; </td></tr>
+    <tr><td class="paramname">nc</td><td>number of components in interpolated function; </td></tr>
+    <tr><td class="paramname">x</td><td>coordinate of evaluation node; </td></tr>
+    <tr><td class="paramname">f</td><td>on exit contains interpolated function.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success. </dd></dl>
+
+</div>
+</div>
+<a id="ga7daa41d7673f4ee9bcb2f8504f743587" name="ga7daa41d7673f4ee9bcb2f8504f743587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7daa41d7673f4ee9bcb2f8504f743587">&#9670;&nbsp;</a></span>grbf_gaussian_eval_2d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gint grbf_gaussian_eval_2d </td>
+          <td>(</td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ystr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>sstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>wstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Evaluate a Gaussian RBF interpolant with arbitrarily spaced interpolation nodes, <img class="formulaInl" alt="$\mathbf{f}=\sum \mathbf{w}_{i}\exp[-|\mathbf{x}-\mathbf{y}_{i}|^{2}/\sigma_{i}^{2}]$" src="form_23.png" width="156" height="15"/>, in two dimensions.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">y</td><td>interpolation node coordinates; </td></tr>
+    <tr><td class="paramname">ystr</td><td>stride in <em>y</em>; </td></tr>
+    <tr><td class="paramname">ny</td><td>number of interpolation nodes; </td></tr>
+    <tr><td class="paramname">s</td><td>interpolation node Gaussian parameters, <img class="formulaInl" alt="$\sigma_{i}$" src="form_19.png" width="10" height="9"/>; </td></tr>
+    <tr><td class="paramname">sstr</td><td>stride in <em>s</em> (can be zero to set constant <img class="formulaInl" alt="$\sigma$" src="form_20.png" width="8" height="6"/>); </td></tr>
+    <tr><td class="paramname">w</td><td>interpolation weights; </td></tr>
+    <tr><td class="paramname">wstr</td><td>stride in <em>w</em>; </td></tr>
+    <tr><td class="paramname">nc</td><td>number of components in interpolated function; </td></tr>
+    <tr><td class="paramname">x</td><td>coordinate of evaluation node; </td></tr>
+    <tr><td class="paramname">f</td><td>on exit contains interpolated function.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success. </dd></dl>
+
+</div>
+</div>
+<a id="ga777243fe2cd639a294f6a92c53e256a2" name="ga777243fe2cd639a294f6a92c53e256a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga777243fe2cd639a294f6a92c53e256a2">&#9670;&nbsp;</a></span>grbf_gaussian_eval_3d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gint grbf_gaussian_eval_3d </td>
+          <td>(</td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ystr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ny</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>sstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>wstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Evaluate a Gaussian RBF interpolant with arbitrarily spaced interpolation nodes, <img class="formulaInl" alt="$\mathbf{f}=\sum \mathbf{w}_{i}\exp[-|\mathbf{x}-\mathbf{y}_{i}|^{2}/\sigma_{i}^{2}]$" src="form_23.png" width="156" height="15"/>, in three dimensions.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">y</td><td>interpolation node coordinates; </td></tr>
@@ -196,7 +386,7 @@ $(function() {
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">al</td><td>overlap parameter <img class="formulaInl" alt="$\alpha$" src="form_3.png" width="8" height="6"/>; </td></tr>
-    <tr><td class="paramname">w</td><td>interpolation weights, evaluated using ::grbf_interpolation_weights_1d_slow or ::grbf_interpolation_weights_1d_fft; </td></tr>
+    <tr><td class="paramname">w</td><td>interpolation weights, evaluated using ::grbf_interpolation_weights_1d_slow or <a class="el" href="group__weights.html#ga48eeede3f4ab56242e765551f0e26f6e">grbf_interpolation_weights_1d_fft</a>; </td></tr>
     <tr><td class="paramname">wstr</td><td>data stride in <em>w</em>; </td></tr>
     <tr><td class="paramname">nw</td><td>number of data points in <em>w</em>; </td></tr>
     <tr><td class="paramname">x</td><td>evaluation coordinate; </td></tr>
@@ -211,7 +401,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 6 2024 16:55:33 for GRBF by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+Generated on Wed Aug 14 2024 11:26:09 for GRBF by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
 </small></address>
 </body>
 </html>

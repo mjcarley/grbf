@@ -11,6 +11,16 @@ libgrbf_la_SOURCES = \
 	convolve.c \
 	cardinal.c
 
+libgrbf_la_LIBADD = libsub.la
+noinst_LTLIBRARIES = libsub.la
+libsub_la_SOURCES = \
+	grbf-private.h \
+	grbf.c \
+	convolve.c \
+	cardinal.c
+
+libsub_la_CFLAGS = -DGRBF_SINGLE_PRECISION
+
 include_HEADERS = \
 	grbf.h
 

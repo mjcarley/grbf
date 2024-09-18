@@ -57,12 +57,15 @@
  * @return 0 on success.
  */
 
-gint grbf_cardinal_function_coefficients(gdouble al, gint N,
-					 gdouble *E, gboolean duplicate,
-					 gdouble *rcond, gdouble *work)
+gint GRBF_FUNCTION_NAME(grbf_cardinal_function_coefficients)(GRBF_REAL al,
+							     gint N,
+							     GRBF_REAL *E,
+							     gboolean duplicate,
+							     GRBF_REAL *rcond,
+							     GRBF_REAL *work)
 
 {
-  gdouble *Es, *A, anorm ;
+  GRBF_REAL *Es, *A, anorm ;
   gint n, info, i1 = 1, i, j, iwork[1024] ;
   
   if ( duplicate ) Es = &(E[N]) ; else Es = E ;
@@ -84,16 +87,32 @@ gint grbf_cardinal_function_coefficients(gdouble al, gint N,
   Es[0] = 1.0 ;
 
   if ( rcond != NULL ) {
+#ifdef GRBF_SINGLE_PRECISION
+    anorm = slansy_("1", "U", &n, A, &n, &(A[n*n])) ;
+#else /*GRBF_SINGLE_PRECISION*/
     anorm = dlansy_("1", "U", &n, A, &n, &(A[n*n])) ;
+#endif /*GRBF_SINGLE_PRECISION*/
   }
   
+#ifdef GRBF_SINGLE_PRECISION
+  spotrf_("U", &n, A, &n, &info) ;
+#else /*GRBF_SINGLE_PRECISION*/
   dpotrf_("U", &n, A, &n, &info) ;
+#endif /*GRBF_SINGLE_PRECISION*/
 
   if ( rcond != NULL ) {
+#ifdef GRBF_SINGLE_PRECISION
+    spocon_("U", &n, A, &n, &anorm, rcond, &(A[n*n]), iwork, &info) ;
+#else /*GRBF_SINGLE_PRECISION*/
     dpocon_("U", &n, A, &n, &anorm, rcond, &(A[n*n]), iwork, &info) ;
+#endif /*GRBF_SINGLE_PRECISION*/
   }
 
+#ifdef GRBF_SINGLE_PRECISION
+  spotrs_("U", &n, &i1, A, &n, Es, &n, &info) ;
+#else /*GRBF_SINGLE_PRECISION*/
   dpotrs_("U", &n, &i1, A, &n, Es, &n, &info) ;
+#endif /*GRBF_SINGLE_PRECISION*/
 
   if ( !duplicate ) return 0 ;
 
@@ -116,10 +135,10 @@ gint grbf_cardinal_function_coefficients(gdouble al, gint N,
  * @return \f$f(x)\f$.
  */
 
-gdouble grbf_cardinal_func(gdouble al, gdouble x)
+GRBF_REAL GRBF_FUNCTION_NAME(grbf_cardinal_func)(GRBF_REAL al, GRBF_REAL x)
 
 {
-  gdouble C ;
+  GRBF_REAL C ;
   
   if ( x == 0 ) return 1.0 ;
 
@@ -128,10 +147,12 @@ gdouble grbf_cardinal_func(gdouble al, gdouble x)
   return C ;
 }
 
-gint grbf_cardinal_interpolation_eval_1d(gdouble al,
-					 gdouble *F, gint fstr, gint nf,
-					 gint nc,
-					 gdouble x, gdouble *f)
+gint GRBF_FUNCTION_NAME(grbf_cardinal_interpolation_eval_1d)(GRBF_REAL al,
+							     GRBF_REAL *F,
+							     gint fstr, gint nf,
+							     gint nc,
+							     GRBF_REAL x,
+							     GRBF_REAL *f)
 
 {
   gint i, j ;
@@ -144,15 +165,18 @@ gint grbf_cardinal_interpolation_eval_1d(gdouble al,
   return 0 ;
 }
 
-gint grbf_cardinal_interpolation_eval_2d(gdouble al,
-					 gdouble *F, gint fstr,
-					 gint ni, gint ldf, gint nj,
-					 gint nc,
-					 gdouble *x, gdouble *f)
-
+gint GRBF_FUNCTION_NAME(grbf_cardinal_interpolation_eval_2d)(GRBF_REAL al,
+							     GRBF_REAL *F,
+							     gint fstr,
+							     gint ni,
+							     gint ldf, gint nj,
+							     gint nc,
+							     GRBF_REAL *x,
+							     GRBF_REAL *f)
+  
 {
   gint i, j, k ;
-  gdouble Cx, Cy ;
+  GRBF_REAL Cx, Cy ;
   
   g_assert(ni <= ldf) ;
 
@@ -169,15 +193,18 @@ gint grbf_cardinal_interpolation_eval_2d(gdouble al,
   return 0 ;
 }
 
-gint grbf_cardinal_interpolation_eval_3d(gdouble al,
-					 gdouble *F, gint fstr,
-					 gint ni, gint nj, gint nk,
-					 gint nc,
-					 gdouble *x, gdouble *f)
+gint GRBF_FUNCTION_NAME(grbf_cardinal_interpolation_eval_3d)(GRBF_REAL al,
+							     GRBF_REAL *F,
+							     gint fstr,
+							     gint ni, gint nj,
+							     gint nk,
+							     gint nc,
+							     GRBF_REAL *x,
+							     GRBF_REAL *f)
 
 {
   gint i, j, k, n ;
-  gdouble Cx, Cy, Cz ;
+  GRBF_REAL Cx, Cy, Cz ;
   
   for ( i = 0 ; i < ni ; i ++ ) {
     Cx = grbf_cardinal_func(al, x[0]-i) ;

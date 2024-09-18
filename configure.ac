@@ -104,6 +104,19 @@ PKG_CHECK_MODULES([FFTW], [fftw3], [
   echo \#################################################################
   exit
 ])
+PKG_CHECK_MODULES([FFTWF], [fftw3f], [
+   AC_DEFINE(HAVE_FFTW3F, 1, [FFTW3F available])
+], [
+  echo \#################################################################
+  echo \# 
+  echo \# Required package FFTW3 not installed. You can install it using
+  echo \# your distribution's package manager or from:
+  echo \#
+  echo \# http://fftw.org/download.html
+  echo \#
+  echo \#################################################################
+  exit
+])
 
 AX_GCC_X86_CPU_SUPPORTS(avx, hasavx=yes) 
 AX_GCC_X86_CPU_SUPPORTS(avx2, hasavx2=yes) 
@@ -139,8 +152,8 @@ AC_F77_WRAPPERS
 #DX_INIT_DOXYGEN(grbf, doc/grbf.dxy)
 
 CPPFLAGS="$glib_cflags $blaswrap_cflags $fftw_cflags"
-CFLAGS="$CFLAGS $OPENMP_CFLAGS $SIMD_FLAGS $FFTW_CFLAGS $GLIB_CFLAGS $blaswrap_cflags"
-LIBS="$GLIB_LIBS $FFTW_LIBS $blaswrap_libs $LIBS"
+CFLAGS="$CFLAGS $OPENMP_CFLAGS $SIMD_FLAGS $FFTW_CFLAGS $FFTW_CFLAGS $GLIB_CFLAGS $blaswrap_cflags"
+LIBS="$GLIB_LIBS $FFTW_LIBS $FFTWF_LIBS $blaswrap_libs $LIBS"
 
 AC_SUBST(CPPFLAGS)
 AC_SUBST(CFLAGS)

@@ -20,3 +20,5 @@
 \_form#19=10x9:$\sigma_{i}$
 \_form#20=8x6:$\sigma$
 \_form#21=13x6:$m$
+\_form#22=158x15:$\mathbf{f}=\sum \mathbf{w}_{i}\exp[-(x-y_{i})^{2}/\sigma_{i}^{2}]$
+\_form#23=156x15:$\mathbf{f}=\sum \mathbf{w}_{i}\exp[-|\mathbf{x}-\mathbf{y}_{i}|^{2}/\sigma_{i}^{2}]$

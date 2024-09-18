@@ -43,15 +43,390 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="memitem:ga48eeede3f4ab56242e765551f0e26f6e"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__weights.html#ga48eeede3f4ab56242e765551f0e26f6e">grbf_interpolation_weights_1d_fft</a> (gdouble *F, gint fstr, gint nf, gint nc, gdouble *E, gint N, gboolean duplicated, gdouble *w, gint wstr)</td></tr>
+<tr class="separator:ga48eeede3f4ab56242e765551f0e26f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1b6ea1fba76c56957ee513069aa79362"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__weights.html#ga1b6ea1fba76c56957ee513069aa79362">grbf_interpolation_weights_fft_1d</a> (gdouble *F, gint fstr, gint nf, gint nc, grbf_workspace_t *w, gdouble *wt, gint wtstr)</td></tr>
+<tr class="separator:ga1b6ea1fba76c56957ee513069aa79362"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaca7f1cfe1fe3c8b26be23de46ae96418"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__weights.html#gaca7f1cfe1fe3c8b26be23de46ae96418">grbf_workspace_init_1d</a> (grbf_workspace_t *w, gdouble *F, gint fstr, gint nf, gdouble *wt, gint wtstr, gint nc, gdouble al, gint N, gdouble *work)</td></tr>
+<tr class="separator:gaca7f1cfe1fe3c8b26be23de46ae96418"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa28a566c9bebfe9ecbea6ff400cfc96c"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__weights.html#gaa28a566c9bebfe9ecbea6ff400cfc96c">grbf_interpolation_weights_fft_2d</a> (gdouble *F, gint fstr, gint ni, gint ldf, gint nj, gint nc, grbf_workspace_t *w, gdouble *wt, gint wtstr, gint ldw)</td></tr>
+<tr class="separator:gaa28a566c9bebfe9ecbea6ff400cfc96c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaafa6b5ef749f36f6ca9ca7662c2de675"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__weights.html#gaafa6b5ef749f36f6ca9ca7662c2de675">grbf_workspace_init_2d</a> (grbf_workspace_t *w, gdouble *F, gint fstr, gint ni, gint ldf, gint nj, gdouble *wt, gint wtstr, gint ldw, gdouble al, gint N, gdouble *work)</td></tr>
 <tr class="separator:gaafa6b5ef749f36f6ca9ca7662c2de675"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2afdfdc90c9d0bb0f8abc67d6e4ad73f"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__weights.html#ga2afdfdc90c9d0bb0f8abc67d6e4ad73f">grbf_workspace_init_3d</a> (grbf_workspace_t *w, gdouble *F, gint fstr, gint ni, gint ldfi, gint nj, gint ldfj, gint nk, gdouble *wt, gint wtstr, gint ldwi, gint ldwj, gdouble al, gint N, gdouble *work)</td></tr>
 <tr class="separator:ga2afdfdc90c9d0bb0f8abc67d6e4ad73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5a16e9c3bd3abfe8ece7ee4b028a274c"><td class="memItemLeft" align="right" valign="top">gint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__weights.html#ga5a16e9c3bd3abfe8ece7ee4b028a274c">grbf_interpolation_weights_fft_3d</a> (gdouble *F, gint fstr, gint ni, gint ldfi, gint nj, gint ldfj, gint nk, gint nc, grbf_workspace_t *w, gdouble *wt, gint wtstr, gint ldwi, gint ldwj)</td></tr>
+<tr class="separator:ga5a16e9c3bd3abfe8ece7ee4b028a274c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5fe056298fc3433de69124aed681966e"><td class="memItemLeft" align="right" valign="top">grbf_workspace_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__weights.html#ga5fe056298fc3433de69124aed681966e">grbf_workspace_alloc</a> (gint dim, gint len)</td></tr>
 <tr class="separator:ga5fe056298fc3433de69124aed681966e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga48eeede3f4ab56242e765551f0e26f6e" name="ga48eeede3f4ab56242e765551f0e26f6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga48eeede3f4ab56242e765551f0e26f6e">&#9670;&nbsp;</a></span>grbf_interpolation_weights_1d_fft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gint grbf_interpolation_weights_1d_fft </td>
+          <td>(</td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>fstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>E</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gboolean&#160;</td>
+          <td class="paramname"><em>duplicated</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>wstr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Evaluate weights of a Gaussian Radial Basis Function fit in one dimension.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">F</td><td>function to fit; </td></tr>
+    <tr><td class="paramname">fstr</td><td>stride between entries in <em>F</em>; </td></tr>
+    <tr><td class="paramname">nf</td><td>number of entries in <em>F</em>; </td></tr>
+    <tr><td class="paramname">nc</td><td>number of components per entry; </td></tr>
+    <tr><td class="paramname">E</td><td>coefficients of cardinal function for Gaussian fit; </td></tr>
+    <tr><td class="paramname">N</td><td>number of elements in <em>E</em> is <code>N+1</code> or <code></code>(2N+1), depending on <em>duplicated</em>; </td></tr>
+    <tr><td class="paramname">duplicated</td><td>if TRUE, <em>E</em> contains entries from -N to N, otherwise, from 0 to N; </td></tr>
+    <tr><td class="paramname">w</td><td>on output contains weights of fit; </td></tr>
+    <tr><td class="paramname">wstr</td><td>stride of entries in <em>w</em>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success. </dd></dl>
+
+</div>
+</div>
+<a id="ga1b6ea1fba76c56957ee513069aa79362" name="ga1b6ea1fba76c56957ee513069aa79362"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1b6ea1fba76c56957ee513069aa79362">&#9670;&nbsp;</a></span>grbf_interpolation_weights_fft_1d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gint grbf_interpolation_weights_fft_1d </td>
+          <td>(</td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>fstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">grbf_workspace_t *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>wt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>wtstr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Evaluate weights of a Gaussian Radial Basis Function fit in one dimension, using FFT.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">F</td><td>function to fit; </td></tr>
+    <tr><td class="paramname">fstr</td><td>stride between entries in <em>F</em>; </td></tr>
+    <tr><td class="paramname">nf</td><td>number of entries in <em>F</em>; </td></tr>
+    <tr><td class="paramname">nc</td><td>number of components per entry; </td></tr>
+    <tr><td class="paramname">w</td><td>workspace allocated with <a class="el" href="group__weights.html#ga5fe056298fc3433de69124aed681966e">grbf_workspace_alloc</a> and initialised with <a class="el" href="group__weights.html#gaca7f1cfe1fe3c8b26be23de46ae96418">grbf_workspace_init_1d</a>; </td></tr>
+    <tr><td class="paramname">wt</td><td>on output contains weights of expansion; </td></tr>
+    <tr><td class="paramname">wtstr</td><td>stride of data in <em>wt</em>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success. </dd></dl>
+
+</div>
+</div>
+<a id="gaa28a566c9bebfe9ecbea6ff400cfc96c" name="gaa28a566c9bebfe9ecbea6ff400cfc96c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa28a566c9bebfe9ecbea6ff400cfc96c">&#9670;&nbsp;</a></span>grbf_interpolation_weights_fft_2d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gint grbf_interpolation_weights_fft_2d </td>
+          <td>(</td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>fstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ni</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ldf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">grbf_workspace_t *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>wt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>wtstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ldw</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Evaluate weights of a Gaussian Radial Basis Function fit in two dimensions, using FFT. The <img class="formulaInl" alt="$k$" src="form_0.png" width="6" height="10"/>th element of entry <code></code>(i,j) in <em>F</em> is indexed as <code>F</code>[i*ldf+j*fstr+k], and similarly for <em>wt</em>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">F</td><td>function to fit; </td></tr>
+    <tr><td class="paramname">fstr</td><td>stride between entries in <em>F</em>; </td></tr>
+    <tr><td class="paramname">ni</td><td>number of entries in first dimension of <em>F</em>; </td></tr>
+    <tr><td class="paramname">ldf</td><td>leading dimension of <em>F</em>; </td></tr>
+    <tr><td class="paramname">nj</td><td>number of entries in second dimension of <em>F</em>; </td></tr>
+    <tr><td class="paramname">nc</td><td>number of components per entry; </td></tr>
+    <tr><td class="paramname">w</td><td>workspace allocated with <a class="el" href="group__weights.html#ga5fe056298fc3433de69124aed681966e">grbf_workspace_alloc</a> and initialised with <a class="el" href="group__weights.html#gaafa6b5ef749f36f6ca9ca7662c2de675">grbf_workspace_init_2d</a>; </td></tr>
+    <tr><td class="paramname">wt</td><td>on output contains weights of expansion; </td></tr>
+    <tr><td class="paramname">wtstr</td><td>stride of data in <em>wt</em>, </td></tr>
+    <tr><td class="paramname">ldw</td><td>leading dimension of <em>wt</em>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success. </dd></dl>
+
+</div>
+</div>
+<a id="ga5a16e9c3bd3abfe8ece7ee4b028a274c" name="ga5a16e9c3bd3abfe8ece7ee4b028a274c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5a16e9c3bd3abfe8ece7ee4b028a274c">&#9670;&nbsp;</a></span>grbf_interpolation_weights_fft_3d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gint grbf_interpolation_weights_fft_3d </td>
+          <td>(</td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>fstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ni</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ldfi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ldfj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nk</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">grbf_workspace_t *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>wt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>wtstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ldwi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>ldwj</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Evaluate weights of a Gaussian Radial Basis Function fit in three dimensions, using FFT. The <img class="formulaInl" alt="$m$" src="form_21.png" width="13" height="6"/>th element of entry <code></code>(i,j,k) in <em>F</em> is indexed as <code>F</code>[i*ldfi+j*ldfj+k*fstr+m], and similarly for <em>wt</em>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">F</td><td>function to fit; </td></tr>
+    <tr><td class="paramname">fstr</td><td>stride between entries in <em>F</em>; </td></tr>
+    <tr><td class="paramname">ni</td><td>number of entries in first dimension of <em>F</em>; </td></tr>
+    <tr><td class="paramname">ldfi</td><td>leading dimension of <em>F</em>; </td></tr>
+    <tr><td class="paramname">nj</td><td>number of entries in second dimension of <em>F</em>; </td></tr>
+    <tr><td class="paramname">ldfj</td><td>second dimension of <em>F</em>; </td></tr>
+    <tr><td class="paramname">nk</td><td>number of entries in third dimension of <em>F</em>; </td></tr>
+    <tr><td class="paramname">nc</td><td>number of components per entry; </td></tr>
+    <tr><td class="paramname">w</td><td>workspace allocated with <a class="el" href="group__weights.html#ga5fe056298fc3433de69124aed681966e">grbf_workspace_alloc</a> and initialised with <a class="el" href="group__weights.html#gaafa6b5ef749f36f6ca9ca7662c2de675">grbf_workspace_init_2d</a>; </td></tr>
+    <tr><td class="paramname">wt</td><td>on output contains weights of expansion; </td></tr>
+    <tr><td class="paramname">wtstr</td><td>stride of data in <em>wt</em>, </td></tr>
+    <tr><td class="paramname">ldwi</td><td>leading dimension of <em>wt</em>; </td></tr>
+    <tr><td class="paramname">ldwj</td><td>second dimension of <em>wt</em>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success. </dd></dl>
+
+</div>
+</div>
 <a id="ga5fe056298fc3433de69124aed681966e" name="ga5fe056298fc3433de69124aed681966e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga5fe056298fc3433de69124aed681966e">&#9670;&nbsp;</a></span>grbf_workspace_alloc()</h2>
 
@@ -77,7 +452,7 @@ $(function() {
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Allocate a new workspace for evaluation of interpolation weights. The workspace needs to be initialised with ::grbf_workspace_init_1d, <a class="el" href="group__weights.html#gaafa6b5ef749f36f6ca9ca7662c2de675">grbf_workspace_init_2d</a>, or <a class="el" href="group__weights.html#ga2afdfdc90c9d0bb0f8abc67d6e4ad73f">grbf_workspace_init_3d</a>, before being used to find weights.</p>
+<p >Allocate a new workspace for evaluation of interpolation weights. The workspace needs to be initialised with <a class="el" href="group__weights.html#gaca7f1cfe1fe3c8b26be23de46ae96418">grbf_workspace_init_1d</a>, <a class="el" href="group__weights.html#gaafa6b5ef749f36f6ca9ca7662c2de675">grbf_workspace_init_2d</a>, or <a class="el" href="group__weights.html#ga2afdfdc90c9d0bb0f8abc67d6e4ad73f">grbf_workspace_init_3d</a>, before being used to find weights.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dim</td><td>dimension of problem, 1, 2, or 3; </td></tr>
@@ -86,6 +461,99 @@ $(function() {
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>newly allocated ::grbf_workspace_t. </dd></dl>
+
+</div>
+</div>
+<a id="gaca7f1cfe1fe3c8b26be23de46ae96418" name="gaca7f1cfe1fe3c8b26be23de46ae96418"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaca7f1cfe1fe3c8b26be23de46ae96418">&#9670;&nbsp;</a></span>grbf_workspace_init_1d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gint grbf_workspace_init_1d </td>
+          <td>(</td>
+          <td class="paramtype">grbf_workspace_t *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>F</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>fstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>wt</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>wtstr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>nc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble&#160;</td>
+          <td class="paramname"><em>al</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gint&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gdouble *&#160;</td>
+          <td class="paramname"><em>work</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Initialise a workspace for evaluation of Gaussian RBF weights on a regular grid. The <img class="formulaInl" alt="$j$" src="form_2.png" width="6" height="11"/>th element of entry <code>i</code> in <em>F</em> is indexed as <code>F</code>[i*fstr+j], and similarly for <em>wt</em>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">w</td><td>workspace to be initialised; </td></tr>
+    <tr><td class="paramname">F</td><td>input function array; </td></tr>
+    <tr><td class="paramname">fstr</td><td>data stride in <em>F</em>; </td></tr>
+    <tr><td class="paramname">nf</td><td>number of points in <em>F</em>; </td></tr>
+    <tr><td class="paramname">wt</td><td>Gaussian weight array </td></tr>
+    <tr><td class="paramname">wtstr</td><td>data stride in <em>wt</em>; </td></tr>
+    <tr><td class="paramname">nc</td><td>number of components per entry in <em>F</em>; </td></tr>
+    <tr><td class="paramname">al</td><td>overlap ratio <img class="formulaInl" alt="$\alpha$" src="form_3.png" width="8" height="6"/>; </td></tr>
+    <tr><td class="paramname">N</td><td>number of cardinal function points (width of convolution window); </td></tr>
+    <tr><td class="paramname">work</td><td>workspace for evaluation of cardinal function, with at least <img class="formulaInl" alt="$(N+1)^2+3N+1$" src="form_5.png" width="101" height="15"/> elements.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success. </dd></dl>
 
 </div>
 </div>
@@ -327,7 +795,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 6 2024 16:55:33 for GRBF by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+Generated on Wed Aug 14 2024 11:26:09 for GRBF by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
 </small></address>
 </body>
 </html>

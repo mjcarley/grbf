@@ -43,10 +43,10 @@ static gint parse_test(char *str)
   return -1 ;
 }
 
-static void test_func(gint d, gdouble *x, gdouble *p, gint nf, gdouble *f)
+static void test_func(gint d, gfloat *x, gfloat *p, gint nf, gfloat *f)
 
 {
-  gdouble R2, R ;
+  gfloat R2, R ;
 
   g_assert(nf > 0) ;
   
@@ -69,7 +69,7 @@ static void test_func(gint d, gdouble *x, gdouble *p, gint nf, gdouble *f)
     R2 = x[0]*x[0] + x[1]*x[1] + x[2]*x[2] ;
     R = sqrt(R2) ;
     if ( nf == 3 ) {
-      gdouble r, ph, th, r0, rh, s, z, w ;
+      gfloat r, ph, th, r0, rh, s, z, w ;
       s = 0.25 ; r0 = 1.2 ;
       /*vortex ring test case*/
       th = atan2(x[1], x[0]) ;
@@ -90,10 +90,10 @@ static void test_func(gint d, gdouble *x, gdouble *p, gint nf, gdouble *f)
   return ;
 }
 
-static void cardinal_coefficients(gdouble al, gint N)
+static void cardinal_coefficients(gfloat al, gint N)
 
 {
-  gdouble *work, *E, rcond ;
+  gfloat *work, *E, rcond ;
   gint wsize, i ;
 
   fprintf(stderr, "coefficients of cardinal function\n") ;
@@ -102,10 +102,10 @@ static void cardinal_coefficients(gdouble al, gint N)
   fprintf(stderr, "alpha = %lg\n", al) ;
   
   wsize = (N+1)*(N+1) + 3*(N+1) ;
-  E = (gdouble *)g_malloc0((2*N+1)*sizeof(gdouble)) ;
-  work = (gdouble *)g_malloc0(wsize*sizeof(gdouble)) ;
+  E = (gfloat *)g_malloc0((2*N+1)*sizeof(gfloat)) ;
+  work = (gfloat *)g_malloc0(wsize*sizeof(gfloat)) ;
 
-  grbf_cardinal_function_coefficients(al, N, E, TRUE, &rcond, work) ;
+  grbf_cardinal_function_coefficients_f(al, N, E, TRUE, &rcond, work) ;
 
   fprintf(stderr, "rcond = %lg\n", rcond) ;
 
@@ -117,10 +117,10 @@ static void cardinal_coefficients(gdouble al, gint N)
   return ;
 }  
 
-static void interpolate_1d(gdouble al, gint N, gint nf)
+static void interpolate_1d(gfloat al, gint N, gint nf)
 
 {
-  gdouble *work, *F, *w, x, y, g[32], p[32], errg[32], errc[32], ft[32] ;
+  gfloat *work, *F, *w, x, y, g[32], p[32], errg[32], errc[32], ft[32] ;
   gint wsize, i, fstr, wstr, nc ;
   /* gboolean duplicate ; */
   grbf_workspace_t *ws ;
@@ -132,18 +132,18 @@ static void interpolate_1d(gdouble al, gint N, gint nf)
   fprintf(stderr, "%d points\n", nf) ;
 
   wsize = (N+1)*(N+1) ;
-  /* E = (gdouble *)g_malloc0((2*N+1)*sizeof(gdouble)) ; */
-  work = (gdouble *)g_malloc0(wsize*sizeof(gdouble)) ;
+  /* E = (gfloat *)g_malloc0((2*N+1)*sizeof(gfloat)) ; */
+  work = (gfloat *)g_malloc0(wsize*sizeof(gfloat)) ;
 
   p[0] = 0.5 ; p[1] = 0.002 ; p[2] = 0.0002 ;
 
   nc = 1 ;  
   fstr = 2 ; wstr = 2 ;
-  F = (gdouble *)g_malloc0(fstr*(nf+2)*sizeof(gdouble)) ;
-  w = (gdouble *)g_malloc0(wstr*(nf+2)*sizeof(gdouble)) ;
+  F = (gfloat *)g_malloc0(fstr*(nf+2)*sizeof(gfloat)) ;
+  w = (gfloat *)g_malloc0(wstr*(nf+2)*sizeof(gfloat)) ;
 
-  ws = grbf_workspace_alloc(1, nf) ;
-  grbf_workspace_init_1d(ws, F, fstr, nf, w, wstr, nc, al, N, work) ;
+  ws = grbf_workspace_alloc_f(1, nf) ;
+  grbf_workspace_init_1d_f(ws, F, fstr, nf, w, wstr, nc, al, N, work) ;
   
   /* duplicate = TRUE ; */
   /* grbf_cardinal_function_coefficients(al, N, E, duplicate, NULL, work) ; */
@@ -155,24 +155,24 @@ static void interpolate_1d(gdouble al, gint N, gint nf)
   
   /* grbf_interpolation_weights_1d_fft(F, fstr, nf, nc, E, N, duplicate, w, wstr) ; */
 
-  grbf_interpolation_weights_fft_1d(F, fstr, nf, nc, ws, w, wstr) ;
+  grbf_interpolation_weights_fft_1d_f(F, fstr, nf, nc, ws, w, wstr) ;
   
   /* for ( x = nf/2-16 ; x < nf/2 + 16 ; x += 0.03 ) { */
-  memset(errg, 0, nc*sizeof(gdouble)) ;
-  memset(errc, 0, nc*sizeof(gdouble)) ;
+  memset(errg, 0, nc*sizeof(gfloat)) ;
+  memset(errc, 0, nc*sizeof(gfloat)) ;
   for ( x = 20 ; x < nf-20 ; x += 0.25 ) {
     y = x - nf/2 ;
     test_func(1, &y, p, nc, ft) ;
-    memset(g, 0, nc*sizeof(gdouble)) ;
-    grbf_interpolation_eval_1d(al, w, wstr, nf, x, g) ;
+    memset(g, 0, nc*sizeof(gfloat)) ;
+    grbf_interpolation_eval_1d_f(al, w, wstr, nf, x, g) ;
 
     for ( i = 0 ; i < nc ; i ++ ) {
       errg[i] = MAX(errg[i], fabs(ft[i]-g[i])) ;
     }
     
     fprintf(stdout, "%1.16e %1.16e", x, g[0]) ;
-    memset(g, 0, nc*sizeof(gdouble)) ;
-    grbf_cardinal_interpolation_eval_1d(al, F, fstr, nf, nc, x, g) ;
+    memset(g, 0, nc*sizeof(gfloat)) ;
+    grbf_cardinal_interpolation_eval_1d_f(al, F, fstr, nf, nc, x, g) ;
     for ( i = 0 ; i < nc ; i ++ ) {
       errc[i] = MAX(errc[i], fabs(ft[i]-g[i])) ;
     }
@@ -189,11 +189,11 @@ static void interpolate_1d(gdouble al, gint N, gint nf)
   return ;
 }
 
-static void interpolate_2d(gdouble al, gint N, gint nf)
+static void interpolate_2d(gfloat al, gint N, gint nf)
 
 {
-  gdouble *work, *E, *F, *w, x[2], y[2], g[32], p[32], rcond, ft[32] ;
-  gdouble errg[32], errc[32], t0 ;
+  gfloat *work, *E, *F, *w, x[2], y[2], g[32], p[32], rcond, ft[32] ;
+  gfloat errg[32], errc[32], t0 ;
   gint wsize, i, j, ni, nj, fstr, wstr, nc, ldf, ldw ;
   grbf_workspace_t *ws ;
 
@@ -203,8 +203,8 @@ static void interpolate_2d(gdouble al, gint N, gint nf)
   fprintf(stderr, "alpha = %lg\n", al) ;
   
   wsize = (N+1)*(N+1) + 3*(N+1) ;
-  E = (gdouble *)g_malloc0((2*N+1)*sizeof(gdouble)) ;
-  work = (gdouble *)g_malloc0(wsize*sizeof(gdouble)) ;
+  E = (gfloat *)g_malloc0((2*N+1)*sizeof(gfloat)) ;
+  work = (gfloat *)g_malloc0(wsize*sizeof(gfloat)) ;
 
   p[0] = 0.125 ; p[1] = 0.001 ; p[2] = 0.00125 ;
   
@@ -212,16 +212,16 @@ static void interpolate_2d(gdouble al, gint N, gint nf)
   ni = nj = nf ; nj -= 7 ;
   ldf = nj*fstr ; ldw = nj*wstr ;
   
-  F = (gdouble *)g_malloc0(ni*ldf*sizeof(gdouble)) ;
-  w = (gdouble *)g_malloc0(ni*ldw*sizeof(gdouble)) ;
+  F = (gfloat *)g_malloc0(ni*ldf*sizeof(gfloat)) ;
+  w = (gfloat *)g_malloc0(ni*ldw*sizeof(gfloat)) ;
 
-  ws = grbf_workspace_alloc(2, ni) ;
-  grbf_workspace_init_2d(ws, F, fstr, ni, ldf, nj, w, wstr, ldw,
+  ws = grbf_workspace_alloc_f(2, ni) ;
+  grbf_workspace_init_2d_f(ws, F, fstr, ni, ldf, nj, w, wstr, ldw,
 			 al, N, work) ;
   
   fprintf(stderr, "%dx%d = %d points\n", ni, nj, ni*nj) ;
 
-  grbf_cardinal_function_coefficients(al, N, E, TRUE, &rcond, work) ;
+  grbf_cardinal_function_coefficients_f(al, N, E, TRUE, &rcond, work) ;
 
   fprintf(stderr, "rcond = %lg\n", rcond) ;
 
@@ -239,22 +239,22 @@ static void interpolate_2d(gdouble al, gint N, gint nf)
   /* fprintf(stderr, "[%lg]\n", g_timer_elapsed(timer, NULL)-t0) ; */
   fprintf(stderr, "evaluating Gaussian weights (FFT) ") ;
   t0 = g_timer_elapsed(timer, NULL) ;
-  grbf_interpolation_weights_fft_2d(F, fstr, ni, ldf, nj, nc, ws, w, wstr, ldw);
+  grbf_interpolation_weights_fft_2d_f(F, fstr, ni, ldf, nj, nc, ws, w, wstr, ldw);
   fprintf(stderr, "[%lg]\n", g_timer_elapsed(timer, NULL)-t0) ;
 
   /* for ( x = nf/2-16 ; x < nf/2 + 16 ; x += 0.03 ) { */
-  memset(errg, 0, nc*sizeof(gdouble)) ;
-  memset(errc, 0, nc*sizeof(gdouble)) ;
+  memset(errg, 0, nc*sizeof(gfloat)) ;
+  memset(errc, 0, nc*sizeof(gfloat)) ;
   for ( x[0] = 30 ; x[0] < ni-30 ; x[0] += 1.5 ) {
     for ( x[1] = 30 ; x[1] < nj-30 ; x[1] += 1.5 ) {
       y[0] = x[0] - ni/2 ; y[1] = x[1] - nj/2 ;
       test_func(2, y, p, nc, ft) ;
-      memset(g, 0, nc*sizeof(gdouble)) ;
-      grbf_interpolation_eval_2d(al, w, wstr, nc, ni, ldw, nj, x, g) ;
+      memset(g, 0, nc*sizeof(gfloat)) ;
+      grbf_interpolation_eval_2d_f(al, w, wstr, nc, ni, ldw, nj, x, g) ;
       for ( i = 0 ; i < nc ; i ++ )  errg[i] = MAX(errg[i], fabs(g[i]-ft[i])) ;
       fprintf(stdout, "%1.16e %1.16e %1.16e", x[0], x[1], g[0]) ;
-      memset(g, 0, nc*sizeof(gdouble)) ;
-      grbf_cardinal_interpolation_eval_2d(al, F, fstr, ni, ldf, nj, nc, x, g) ;
+      memset(g, 0, nc*sizeof(gfloat)) ;
+      grbf_cardinal_interpolation_eval_2d_f(al, F, fstr, ni, ldf, nj, nc, x, g) ;
       for ( i = 0 ; i < nc ; i ++ )  errc[i] = MAX(errc[i], fabs(g[i]-ft[i])) ;
       fprintf(stdout, " %1.16e %1.16e\n", g[0], ft[0]) ;
     }
@@ -276,11 +276,11 @@ static void interpolate_2d(gdouble al, gint N, gint nf)
   return ;
 }
 
-static void interpolate_3d(gdouble al, gint N, gint nf)
+static void interpolate_3d(gfloat al, gint N, gint nf)
 
 {
-  gdouble *work, *E, *F, *w, x[3], y[3], g, p[32], rcond, ft, errg, errc ;
-  gdouble t0 ;
+  gfloat *work, *E, *F, *w, x[3], y[3], g, p[32], rcond, ft, errg, errc ;
+  gfloat t0 ;
   gint wsize, i, j, k, ni, nj, nk, fstr, wstr, nc, ldfi, ldfj, ldwi, ldwj ;
   grbf_workspace_t *ws ;
 
@@ -290,8 +290,8 @@ static void interpolate_3d(gdouble al, gint N, gint nf)
   fprintf(stderr, "alpha = %lg\n", al) ;
 
   wsize = (N+1)*(N+1) + 3*(N+1) ;
-  E = (gdouble *)g_malloc0((2*N+1)*sizeof(gdouble)) ;
-  work = (gdouble *)g_malloc0(wsize*sizeof(gdouble)) ;
+  E = (gfloat *)g_malloc0((2*N+1)*sizeof(gfloat)) ;
+  work = (gfloat *)g_malloc0(wsize*sizeof(gfloat)) ;
 
   p[0] = 0.25 ; p[1] = 0.002 ; p[2] = 0.00125 ;
   
@@ -299,12 +299,12 @@ static void interpolate_3d(gdouble al, gint N, gint nf)
   ni = nj = nk = nf ;
   ldfj = nk*fstr ; ldfi = nj*ldfj ;
   ldwj = nk*wstr ; ldwi = nj*ldwj ;
-  F = (gdouble *)g_malloc0(ni*ldfi*sizeof(gdouble)) ;
-  w = (gdouble *)g_malloc0(ni*ldwi*sizeof(gdouble)) ;
+  F = (gfloat *)g_malloc0(ni*ldfi*sizeof(gfloat)) ;
+  w = (gfloat *)g_malloc0(ni*ldwi*sizeof(gfloat)) ;
   
   fprintf(stderr, "%dx%dx%d=%d points\n", ni, nj, nk, ni*nj*nk) ;
 
-  grbf_cardinal_function_coefficients(al, N, E, TRUE, &rcond, work) ;
+  grbf_cardinal_function_coefficients_f(al, N, E, TRUE, &rcond, work) ;
 
   fprintf(stderr, "rcond = %lg\n", rcond) ;
   
@@ -324,12 +324,12 @@ static void interpolate_3d(gdouble al, gint N, gint nf)
   /* fprintf(stderr, "wt (slow) = %lg\n", w[i*ni*nj+j*nk+k]) ; */
   
   ws = grbf_workspace_alloc(3, MAX(ni,MAX(nj,nk))) ;
-  grbf_workspace_init_3d(ws, F, fstr, ni, ldfi, nj, ldfj, nk,
+  grbf_workspace_init_3d_f(ws, F, fstr, ni, ldfi, nj, ldfj, nk,
 			       w, wstr, ldwi, ldwj, al, N, work) ;
 
   fprintf(stderr, "evaluating Gaussian weights (FFT) ") ;
   t0 = g_timer_elapsed(timer, NULL) ;
-  grbf_interpolation_weights_fft_3d(F, fstr, ni, ldfi, nj, ldfj, nk, nc,
+  grbf_interpolation_weights_fft_3d_f(F, fstr, ni, ldfi, nj, ldfj, nk, nc,
 					  ws, w, wstr, ldwi, ldwj);
   fprintf(stderr, "[%lg]\n", g_timer_elapsed(timer, NULL)-t0) ;
   
@@ -344,11 +344,11 @@ static void interpolate_3d(gdouble al, gint N, gint nf)
 	y[2] = x[2] - nk/2 ; 
 	test_func(3, y, p, nc, &ft) ;
 	g = 0 ;
-	grbf_interpolation_eval_3d(al, w, wstr, nc, ni, nj, nk, x, &g) ;
+	grbf_interpolation_eval_3d_f(al, w, wstr, nc, ni, nj, nk, x, &g) ;
 	errg = MAX(errg, fabs(g-ft)) ;
 	fprintf(stdout, "%1.16e %1.16e %1.16e %1.16e", x[0], x[1], x[2], g) ;
 	g = 0 ;
-	grbf_cardinal_interpolation_eval_3d(al, F, fstr, ni, nj, nk, nc,
+	grbf_cardinal_interpolation_eval_3d_f(al, F, fstr, ni, nj, nk, nc,
 						  x, &g) ;
 	errc = MAX(errc, fabs(g-ft)) ;      
 	fprintf(stdout, " %1.16e %1.16e\n", g, ft) ;
@@ -368,12 +368,12 @@ static void interpolate_3d(gdouble al, gint N, gint nf)
   return ;
 }
 
-static void mapping_3d(gdouble al, gint N, gint nf)
+static void mapping_3d(gfloat al, gint N, gint nf)
 
 {
-  gdouble *work, *E, *F, *w, x[3], *y ;
-  gdouble g[32], p[32], rcond, ft[32], errg[32], errc[32] ;
-  gdouble t0, x0, y0, z0, x1, y1, z1, s, dx ;
+  gfloat *work, *E, *F, *w, x[3], *y ;
+  gfloat g[32], p[32], rcond, ft[32], errg[32], errc[32] ;
+  gfloat t0, x0, y0, z0, x1, y1, z1, s, dx ;
   gint wsize, i, j, k, ni, nj, nk, fstr, wstr, nc, ldfi, ldfj, ldwi, ldwj ;
   grbf_workspace_t *ws ;
 
@@ -385,8 +385,8 @@ static void mapping_3d(gdouble al, gint N, gint nf)
   fprintf(stderr, "alpha = %lg\n", al) ;
 
   wsize = (N+1)*(N+1) + 3*(N+1) ;
-  E = (gdouble *)g_malloc0((2*N+1)*sizeof(gdouble)) ;
-  work = (gdouble *)g_malloc0(wsize*sizeof(gdouble)) ;
+  E = (gfloat *)g_malloc0((2*N+1)*sizeof(gfloat)) ;
+  work = (gfloat *)g_malloc0(wsize*sizeof(gfloat)) ;
 
   p[0] = 0.25 ; p[1] = 0.002 ; p[2] = 0.00125 ;
 
@@ -398,7 +398,7 @@ static void mapping_3d(gdouble al, gint N, gint nf)
   dx = (x1 - x0)/ni ; s = dx/al ;
   fprintf(stderr, "sigma = %lg\n", s) ;
 
-  grbf_grid_adjust_3d(&x0, &x1, &ni, &y0, &y1, &nj, &z0, &z1, &nk, dx) ;
+  grbf_grid_adjust_3d_f(&x0, &x1, &ni, &y0, &y1, &nj, &z0, &z1, &nk, dx) ;
 
   fprintf(stderr, "limits x: %lg %lg (%d)\n", x0, x1, ni) ;
   fprintf(stderr, "limits y: %lg %lg (%d)\n", y0, y1, nj) ;
@@ -407,9 +407,9 @@ static void mapping_3d(gdouble al, gint N, gint nf)
   fstr = 3 ; wstr = 3 ; nc = 3 ;
   ldfj = nk*fstr ; ldfi = nj*ldfj ;
   ldwj = nk*wstr ; ldwi = nj*ldwj ;
-  F = (gdouble *)g_malloc0(ni*ldfi*sizeof(gdouble)) ;
-  w = (gdouble *)g_malloc0(ni*ldwi*sizeof(gdouble)) ;
-  y = (gdouble *)g_malloc0(3*ni*nj*nk*sizeof(gdouble)) ;
+  F = (gfloat *)g_malloc0(ni*ldfi*sizeof(gfloat)) ;
+  w = (gfloat *)g_malloc0(ni*ldwi*sizeof(gfloat)) ;
+  y = (gfloat *)g_malloc0(3*ni*nj*nk*sizeof(gfloat)) ;
 
   for ( i = 0 ; i < ni ; i ++ ) {
     for ( j = 0 ; j < nj ; j ++ ) {
@@ -424,12 +424,12 @@ static void mapping_3d(gdouble al, gint N, gint nf)
   }
   
   ws = grbf_workspace_alloc(3, MAX(ni,MAX(nj,nk))) ;
-  grbf_workspace_init_3d(ws, F, fstr, ni, ldfi, nj, ldfj, nk,
+  grbf_workspace_init_3d_f(ws, F, fstr, ni, ldfi, nj, ldfj, nk,
 			 w, wstr, ldwi, ldwj, al, N, work) ;
 
   fprintf(stderr, "evaluating Gaussian weights (FFT) ") ;
   t0 = g_timer_elapsed(timer, NULL) ;
-  grbf_interpolation_weights_fft_3d(F, fstr, ni, ldfi, nj, ldfj, nk, nc,
+  grbf_interpolation_weights_fft_3d_f(F, fstr, ni, ldfi, nj, ldfj, nk, nc,
 				    ws, w, wstr, ldwi, ldwj);
   fprintf(stderr, "[%lg]\n", g_timer_elapsed(timer, NULL)-t0) ;
 
@@ -437,8 +437,8 @@ static void mapping_3d(gdouble al, gint N, gint nf)
   
   /* for ( x = nf/2-16 ; x < nf/2 + 16 ; x += 0.03 ) { */
 
-  memset(errg, 0, 3*sizeof(gdouble)) ;
-  memset(errc, 0, 3*sizeof(gdouble)) ;
+  memset(errg, 0, 3*sizeof(gfloat)) ;
+  memset(errc, 0, 3*sizeof(gfloat)) ;
   fprintf(stderr, "evaluating field\n") ;
 
   for ( i = 0 ; i < 237 ; i ++ ) {
@@ -447,8 +447,8 @@ static void mapping_3d(gdouble al, gint N, gint nf)
     x[1] = y0 + (y1 - y0)*i/237 ; 
     x[2] = z0 + (z1 - z0)*i/237 ; 
     test_func(3, x, p, nc, ft) ;
-    memset(g, 0, 3*sizeof(gdouble)) ;
-    grbf_gaussian_eval_3d(y, 3, ni*nj*nk, &s, 0, w, wstr, nc,x, g) ;
+    memset(g, 0, 3*sizeof(gfloat)) ;
+    grbf_gaussian_eval_3d_f(y, 3, ni*nj*nk, &s, 0, w, wstr, nc,x, g) ;
     for ( j = 0 ; j < nc ; j ++ ) {
       errg[j] = MAX(errg[j], fabs(g[j]-ft[j])) ;
     }
@@ -474,10 +474,10 @@ static void mapping_3d(gdouble al, gint N, gint nf)
   return ;
 }
 
-static void cardinal_func(gdouble al, gint N)
+static void cardinal_func(gfloat al, gint N)
 
 {
-  gdouble *work, *E, f, x, rcond ;
+  gfloat *work, *E, f, x, rcond ;
   gint wsize, j ;
 
   fprintf(stderr, "evaluation of cardinal function\n") ;
@@ -486,15 +486,15 @@ static void cardinal_func(gdouble al, gint N)
   fprintf(stderr, "alpha = %lg\n", al) ;
 
   wsize = (N+1)*(N+1) + 3*(N+1) ;
-  E = (gdouble *)g_malloc0((2*N+1)*sizeof(gdouble)) ;
-  work = (gdouble *)g_malloc0(wsize*sizeof(gdouble)) ;
+  E = (gfloat *)g_malloc0((2*N+1)*sizeof(gfloat)) ;
+  work = (gfloat *)g_malloc0(wsize*sizeof(gfloat)) ;
 
-  grbf_cardinal_function_coefficients(al, N, E, TRUE, &rcond, work) ;
+  grbf_cardinal_function_coefficients_f(al, N, E, TRUE, &rcond, work) ;
 
   fprintf(stderr, "rcond = %lg\n", rcond) ;
 
   for ( x = -5 ; x <= 5 ; x += 0.1 ) {
-    fprintf(stdout, "%1.16e %1.16e", x, grbf_cardinal_func(al, x)) ;
+    fprintf(stdout, "%1.16e %1.16e", x, grbf_cardinal_func_f(al, x)) ;
     f = 0 ;
     for ( j = 0 ; j < 2*N+1 ; j ++ )
       f += E[j]*exp(-al*al*(x-(j-N))*(x-(j-N))) ;
@@ -504,11 +504,11 @@ static void cardinal_func(gdouble al, gint N)
   return ;
 }
 
-static void mapping_1d(gdouble al, gint N, gint nf)
+static void mapping_1d(gfloat al, gint N, gint nf)
 
 {
-  gdouble *work, *E, *F, *w, *y, x, ft[32], g[32], p[32], x0, x1, dx, s ;
-  gdouble errs, errc[32], errg[32], rcond ;
+  gfloat *work, *E, *F, *w, *y, x, ft[32], g[32], p[32], x0, x1, dx, s ;
+  gfloat errs, errc[32], errg[32], rcond ;
   gint wsize, i, j, fstr, wstr, nc ;
 
   fprintf(stderr, "mapped interpolation (non-unit spacing)\n") ;
@@ -519,17 +519,17 @@ static void mapping_1d(gdouble al, gint N, gint nf)
   errs = 4.0*exp(-M_PI*M_PI/al/al) ;
   
   wsize = (N+1)*(N+1) + 3*(N+1) ;
-  E = (gdouble *)g_malloc0((2*N+1)*sizeof(gdouble)) ;
-  work = (gdouble *)g_malloc0(wsize*sizeof(gdouble)) ;
+  E = (gfloat *)g_malloc0((2*N+1)*sizeof(gfloat)) ;
+  work = (gfloat *)g_malloc0(wsize*sizeof(gfloat)) ;
 
   p[0] = 4.3 ; p[1] = 0.02 ; p[2] = 0.1 ;
   
   fstr = 2 ; wstr = 2 ; nc = 2 ;
-  F = (gdouble *)g_malloc0(fstr*nf*sizeof(gdouble)) ;
-  y = (gdouble *)g_malloc0(     nf*sizeof(gdouble)) ;
-  w = (gdouble *)g_malloc0(wstr*nf*sizeof(gdouble)) ;
+  F = (gfloat *)g_malloc0(fstr*nf*sizeof(gfloat)) ;
+  y = (gfloat *)g_malloc0(     nf*sizeof(gfloat)) ;
+  w = (gfloat *)g_malloc0(wstr*nf*sizeof(gfloat)) ;
   
-  grbf_cardinal_function_coefficients(al, N, E, TRUE, &rcond, work) ;
+  grbf_cardinal_function_coefficients_f(al, N, E, TRUE, &rcond, work) ;
 
   fprintf(stderr, "rcond = %lg\n", rcond) ;
   
@@ -542,21 +542,21 @@ static void mapping_1d(gdouble al, gint N, gint nf)
     test_func(1, &(y[i]), p, nc, &(F[i*fstr])) ;
   }
   
-  grbf_interpolation_weights_1d_slow(F, fstr, nf, nc, E, N, TRUE, w, wstr) ;
+  grbf_interpolation_weights_1d_slow_f(F, fstr, nf, nc, E, N, TRUE, w, wstr) ;
 
-  memset(errg, 0, nc*sizeof(gdouble)) ;
-  memset(errc, 0, nc*sizeof(gdouble)) ;
+  memset(errg, 0, nc*sizeof(gfloat)) ;
+  memset(errc, 0, nc*sizeof(gfloat)) ;
   for ( x = x0+2 ; x <= x1-2 ; x += 0.125 ) {
     test_func(1, &x, p, nc, ft) ;
-    memset(g, 0, nc*sizeof(gdouble)) ;
-    grbf_gaussian_eval_1d(y, 1, nf, &s, 0, w, wstr, nc, x, g) ;
+    memset(g, 0, nc*sizeof(gfloat)) ;
+    grbf_gaussian_eval_1d_f(y, 1, nf, &s, 0, w, wstr, nc, x, g) ;
     fprintf(stdout, "%1.16e", x) ;
     for ( j = 0 ; j < nc ; j ++ ) {
       errg[j] = MAX(errg[j], fabs(g[j]-ft[j])) ;
       fprintf(stdout, " %1.16e", g[j]) ;
     }
-    memset(g, 0, nc*sizeof(gdouble)) ;
-    grbf_cardinal_interpolation_eval_1d(al, F, fstr, nf, nc,
+    memset(g, 0, nc*sizeof(gfloat)) ;
+    grbf_cardinal_interpolation_eval_1d_f(al, F, fstr, nf, nc,
 					(x-x0)/dx, g) ;
     /* fprintf(stdout, " %1.16e %1.16e\n", g, ft) ; */
     for ( j = 0 ; j < nc ; j ++ ) {
@@ -586,11 +586,11 @@ static void mapping_1d(gdouble al, gint N, gint nf)
   return ;
 }
 
-static void mapping_2d(gdouble al, gint N, gint nf)
+static void mapping_2d(gfloat al, gint N, gint nf)
 
 {
-  gdouble *work, *E, *F, *w, *y, x[2], g, p[32], x0, x1, y0, y1, dx, s ;
-  gdouble errs, errc, errg, rcond, ft, ij[2], t0 ;
+  gfloat *work, *E, *F, *w, *y, x[2], g, p[32], x0, x1, y0, y1, dx, s ;
+  gfloat errs, errc, errg, rcond, ft, ij[2], t0 ;
   gint wsize, i, j, fstr, wstr, nc, ni, nj ;
 
   fprintf(stderr, "two-dimensional mapped interpolation (non-unit spacing)\n") ;
@@ -603,17 +603,17 @@ static void mapping_2d(gdouble al, gint N, gint nf)
   fprintf(stderr, "%dx%d=%d interpolation nodes\n", ni, nj, ni*nj) ;
   
   wsize = (N+1)*(N+1) + 3*(N+1) ;
-  E = (gdouble *)g_malloc0((2*N+1)*sizeof(gdouble)) ;
-  work = (gdouble *)g_malloc0(wsize*sizeof(gdouble)) ;
+  E = (gfloat *)g_malloc0((2*N+1)*sizeof(gfloat)) ;
+  work = (gfloat *)g_malloc0(wsize*sizeof(gfloat)) ;
 
   p[0] = 4.3 ; p[1] = 0.02 ; p[2] = 0.1 ;
   
   fstr = 1 ; wstr = 1 ; nc = 1 ;
-  F = (gdouble *)g_malloc0(fstr*(ni*nj)*sizeof(gdouble)) ;
-  y = (gdouble *)g_malloc0(2*   (ni*nj)*sizeof(gdouble)) ;
-  w = (gdouble *)g_malloc0(wstr*(ni*nj)*sizeof(gdouble)) ;
+  F = (gfloat *)g_malloc0(fstr*(ni*nj)*sizeof(gfloat)) ;
+  y = (gfloat *)g_malloc0(2*   (ni*nj)*sizeof(gfloat)) ;
+  w = (gfloat *)g_malloc0(wstr*(ni*nj)*sizeof(gfloat)) ;
   
-  grbf_cardinal_function_coefficients(al, N, E, TRUE, &rcond, work) ;
+  grbf_cardinal_function_coefficients_f(al, N, E, TRUE, &rcond, work) ;
 
   fprintf(stderr, "rcond = %lg\n", rcond) ;
   
@@ -632,7 +632,7 @@ static void mapping_2d(gdouble al, gint N, gint nf)
 
   fprintf(stderr, "evaluating Gaussian weights ") ;
   t0 = g_timer_elapsed(timer, NULL) ;
-  grbf_interpolation_weights_2d_slow(F, fstr, nc, ni, nj, nj, E, N, TRUE,
+  grbf_interpolation_weights_2d_slow_f(F, fstr, nc, ni, nj, nj, E, N, TRUE,
 					   w, wstr, nj) ;
   fprintf(stderr, "[%lg]\n", g_timer_elapsed(timer, NULL)-t0) ;
   
@@ -640,7 +640,7 @@ static void mapping_2d(gdouble al, gint N, gint nf)
   t0 = g_timer_elapsed(timer, NULL) ;
   for ( x[0] = x0+2 ; x[0] <= x1-2 ; x[0] += 0.125 ) {
     for ( x[1] = y0+2 ; x[1] <= y1-2 ; x[1] += 0.125 ) {
-      grbf_cardinal_interpolation_eval_2d(al, F, fstr, ni, nj, nj, nc, ij, &g) ;
+      grbf_cardinal_interpolation_eval_2d_f(al, F, fstr, ni, nj, nj, nc, ij, &g) ;
     }
   }
   fprintf(stderr, "[%lg]\n", g_timer_elapsed(timer, NULL)-t0) ;
@@ -649,7 +649,7 @@ static void mapping_2d(gdouble al, gint N, gint nf)
   t0 = g_timer_elapsed(timer, NULL) ;
   for ( x[0] = x0+2 ; x[0] <= x1-2 ; x[0] += 0.125 ) {
     for ( x[1] = y0+2 ; x[1] <= y1-2 ; x[1] += 0.125 ) {
-      grbf_gaussian_eval_2d(y, 2, ni*nj, &s, 0, w, wstr, nc, x, &g) ;
+      grbf_gaussian_eval_2d_f(y, 2, ni*nj, &s, 0, w, wstr, nc, x, &g) ;
     }
   }
   fprintf(stderr, "[%lg]\n", g_timer_elapsed(timer, NULL)-t0) ;
@@ -659,12 +659,12 @@ static void mapping_2d(gdouble al, gint N, gint nf)
     for ( x[1] = y0+2 ; x[1] <= y1-2 ; x[1] += 0.125 ) {
       test_func(2, x, p, nc, &ft) ;      
       g = 0 ;
-      grbf_gaussian_eval_2d(y, 2, ni*nj, &s, 0, w, wstr, nc, x, &g) ;
+      grbf_gaussian_eval_2d_f(y, 2, ni*nj, &s, 0, w, wstr, nc, x, &g) ;
       errg = MAX(errg, fabs(g-ft)) ;
       fprintf(stdout, "%1.16e %1.16e %1.16e", x[0], x[1], g) ;
       g = 0 ;
       ij[0] = (x[0] - x0)/dx ; ij[1] = (x[1] - y0)/dx ; 
-      grbf_cardinal_interpolation_eval_2d(al, F, fstr, ni, nj, nj, nc, ij, &g) ;
+      grbf_cardinal_interpolation_eval_2d_f(al, F, fstr, ni, nj, nj, nc, ij, &g) ;
       fprintf(stdout, " %1.16e %1.16e\n", g, ft) ;
       errc = MAX(errc, fabs(g-ft)) ;
     }
@@ -686,7 +686,7 @@ static void mapping_2d(gdouble al, gint N, gint nf)
 gint main(gint argc, char **argv)
 
 {
-  gdouble al, tol ;
+  gfloat al, tol ;
   gint N, test, nf ;
   char ch ;
 
