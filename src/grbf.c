@@ -460,7 +460,8 @@ gint GRBF_FUNCTION_NAME(grbf_interpolation_eval_3d)(GRBF_REAL al,
   return 0 ;
 }
 
-static void adjust_limits(GRBF_REAL *xmin, GRBF_REAL *xmax, gint *nx, GRBF_REAL del)
+static void adjust_limits(GRBF_REAL *xmin, GRBF_REAL *xmax, gint *nx,
+			  GRBF_REAL del)
 
 {
   *nx = (gint)(ceil(((*xmax)-(*xmin))/del)) + 1 ;

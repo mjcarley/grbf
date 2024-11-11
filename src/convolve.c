@@ -233,7 +233,11 @@ static void cardinal_coefficients_fft(gint N, GRBF_REAL al,
 
 {
   gint i ;
+#ifdef GRBF_SINGLE_PRECISION
+  fftwf_plan p ;
+#else /*GRBF_SINGLE_PRECISION*/
   fftw_plan p ;
+#endif /*GRBF_SINGLE_PRECISION*/
   memset(E, 0, ne*sizeof(GRBF_REAL)) ;
   GRBF_FUNCTION_NAME(grbf_cardinal_function_coefficients)(al, N, E, FALSE,
 							  NULL, work) ;
@@ -245,11 +249,13 @@ static void cardinal_coefficients_fft(gint N, GRBF_REAL al,
 
 #ifdef GRBF_SINGLE_PRECISION
   p = fftwf_plan_dft_r2c_1d(ne, E, (fftwf_complex *)E, FFTW_ESTIMATE) ;
+  fftwf_execute(p) ;
+  fftwf_destroy_plan(p) ;
 #else /*GRBF_SINGLE_PRECISION*/
   p = fftw_plan_dft_r2c_1d(ne, E, (fftw_complex *)E, FFTW_ESTIMATE) ;
-#endif /*GRBF_SINGLE_PRECISION*/
   fftw_execute(p) ;
   fftw_destroy_plan(p) ;
+#endif /*GRBF_SINGLE_PRECISION*/
   
   return ;
 }
