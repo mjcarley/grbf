@@ -60,7 +60,6 @@ AC_PROG_AWK
 AC_ISC_POSIX
 AC_HEADER_STDC
 
-
 AC_CHECK_PROG(BLASWRAP, blaswrap-config, yes, no)
 if test x$BLASWRAP = xyes ; then
    AC_DEFINE(HAVE_BLASWRAP, 1, [BLAS wrapper header available])
@@ -91,9 +90,8 @@ PKG_CHECK_MODULES([GLIB], [glib-2.0], [],
   exit
 ])
 
-PKG_CHECK_MODULES([FFTW], [fftw3], [
-   AC_DEFINE(HAVE_FFTW3, 1, [FFTW3 available])
-], [
+PKG_CHECK_MODULES([FFTW], [fftw3], [],
+[
   echo \#################################################################
   echo \# 
   echo \# Required package FFTW3 not installed. You can install it using
@@ -104,9 +102,9 @@ PKG_CHECK_MODULES([FFTW], [fftw3], [
   echo \#################################################################
   exit
 ])
-PKG_CHECK_MODULES([FFTWF], [fftw3f], [
-   AC_DEFINE(HAVE_FFTW3F, 1, [FFTW3F available])
-], [
+
+PKG_CHECK_MODULES([FFTWF], [fftw3f], [],
+[
   echo \#################################################################
   echo \# 
   echo \# Required package FFTW3 not installed. You can install it using

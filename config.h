@@ -42,12 +42,6 @@
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #define HAVE_DLFCN_H 1
 
-/* FFTW3 available */
-#define HAVE_FFTW3 1
-
-/* FFTW3F available */
-#define HAVE_FFTW3F 1
-
 /* Define if fma instructions are supported */
 #define HAVE_FMA_INSTRUCTIONS 1
 
